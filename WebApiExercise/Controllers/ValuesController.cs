@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using SkillTree_MVC_HW.Repository;
 using WebApiExercise.Models.DataModel;
+using WebApiExercise.Repository;
 
 namespace WebApiExercise.Controllers
 {
@@ -35,6 +35,7 @@ namespace WebApiExercise.Controllers
         // PUT api/values/5
         public void Put(int id, [FromBody]MyTestDataTable value)
         {
+            myTestDataTableRepository.Update(value);
         }
 
         // DELETE api/values/5

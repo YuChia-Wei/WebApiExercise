@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SkillTree_MVC_HW.Repository
+namespace WebApiExercise.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private DbSet<T> _objectSet;
+        private readonly DbContext _dbContext;
+        private readonly DbSet<T> _objectSet;
+
         public Repository(DbContext dbContext)
         {
+            _dbContext = dbContext;
             _objectSet = dbContext.Set<T>();
         }
 
@@ -36,6 +40,11 @@ namespace SkillTree_MVC_HW.Repository
         public void Remove(T entity)
         {
             _objectSet.Remove(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _objectSet.AddOrUpdate(entity);
         }
     }
 }

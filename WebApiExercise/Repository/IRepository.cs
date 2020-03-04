@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SkillTree_MVC_HW.Repository
+namespace WebApiExercise.Repository
 {
     public interface IRepository<T> where T : class
     {
