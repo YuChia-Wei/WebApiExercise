@@ -1,39 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using SkillTree_MVC_HW.Repository;
+using WebApiExercise.Models.DataModel;
 
 namespace WebApiExercise.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        private Repository<MyTestDataTable> myTestDataTableRepository;
+
+        public ValuesController()
         {
-            return new string[] { "value1", "value2" };
+            myTestDataTableRepository = new Repository<MyTestDataTable>(new MyTestDBEntities());
+        }
+
+        // GET api/values
+        public IEnumerable<MyTestDataTable> Get()
+        {
+            return myTestDataTableRepository.LookupAll();
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public MyTestDataTable Get(int id)
         {
-            return "value";
+            return myTestDataTableRepository.GetSingle(t => t.Id == id);
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public void Post([FromBody]MyTestDataTable value)
         {
+            myTestDataTableRepository.Create(value);
         }
 
         // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]MyTestDataTable value)
         {
         }
 
         // DELETE api/values/5
         public void Delete(int id)
         {
+            myTestDataTableRepository.Remove(myTestDataTableRepository.GetSingle(t => t.Id == id));
         }
     }
 }
