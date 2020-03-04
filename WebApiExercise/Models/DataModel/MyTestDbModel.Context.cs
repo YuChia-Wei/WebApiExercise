@@ -12,7 +12,8 @@ namespace WebApiExercise
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using WebApiExercise.Models.DataModel;
+
     public partial class MyTestDBEntities : DbContext
     {
         public MyTestDBEntities()
