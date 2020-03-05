@@ -8,12 +8,10 @@ namespace WebApiExercise.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly DbContext _dbContext;
         private readonly DbSet<T> _objectSet;
 
         public Repository(DbContext dbContext)
         {
-            _dbContext = dbContext;
             _objectSet = dbContext.Set<T>();
         }
 
